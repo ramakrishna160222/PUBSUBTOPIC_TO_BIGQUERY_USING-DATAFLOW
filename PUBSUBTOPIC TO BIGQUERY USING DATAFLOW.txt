@@ -1,5 +1,10 @@
 PUBSUB Topic To BIGQUERY USING DATAFLOW PIPELINE
 -------------------------
+Create a CloudStorage bucket
+Create a pubsub topic
+create a dataset and table in BQ
+Run Dataflow pipeline job to read PubSub Message write to BQ
+
 gcloud auth list
 	It will give who logged in the project
 gcloud config list project

@@ -1,0 +1,36 @@
+PUBSUB Topic To BIGQUERY USING DATAFLOW PIPELINE
+-------------------------
+gcloud auth list
+	It will give who logged in the project
+gcloud config list project
+	It will give the current working project
+gsutil mb gs://UniqueBucketName
+	To create a bucket in cloudStorage
+gcloud pubsub topics create MyPubSub01
+	To create a pubsub topic
+bq mk mydataset01
+	To create a Dataset in Bigquery
+bq mk mydataset01.mytable01 name:STRING,country:STRING
+	To create a Table in DataSet with columns
+	
+Open DataFlow and Create A job
+    Template: pubsub to bigquery
+	Name:mydemo-project-001
+	OutputDataset: 
+	Input Topic:
+	Number of workers:1
+	Max No of workers:1
+
+
+OPen pubsub topic and publish a message in Json Format
+{
+"name":"Krishna",
+"country":"india"
+}
+{
+"name":"Johb",
+"country":"USA	"
+}
+
+gcloud dataflow flex-template run mydemo-project-001 --template-file-gcs-location gs://dataflow-templates-us-central1/latest/flex/PubSub_to_BigQuery_Flex --region us-central1 --num-workers 1 - -additional-user-labels {} --parameters outputTableSpec=geometric-vim-409715:mydataset01.mytable01,inputTopic=projects/geometric-vim-409715/topics/MyPubSub01,javascriptTextTransformReloadIntervalMinutes=0,useStorageWriteApi=false,useStorageWriteApiAtLeastOnce=false ,numStorageWriteApiStreams =0,maxNumWorkers=1
+
